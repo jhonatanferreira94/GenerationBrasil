@@ -45,11 +45,5 @@ SELECT * FROM tb_pizzas;
 SELECT * FROM tb_pizzas INNER JOIN tb_categorias ON tb_pizzas.categorias_id=tb_categorias.id_categorias;
 
 SELECT * FROM tb_pizzas WHERE valor>45;
-SELECT * FROM tb_pizzas WHERE valor BETWEEN 50 AND 100;
+SELECT * FROM tb_pizzas WHERE valor BETWEEN 5 AND 100;
 SELECT * FROM tb_categorias WHERE nome LIKE "%M%";
-SELECT * FROM tb_pizzas INNER JOIN tb_categorias ON tb_pizzas.categorias_id=tb_categorias.id_categorias WHERE categoria LIKE "%Salgada%";
-
-
-
-
-
