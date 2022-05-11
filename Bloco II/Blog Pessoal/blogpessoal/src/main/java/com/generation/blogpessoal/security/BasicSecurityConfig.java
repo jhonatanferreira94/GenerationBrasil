@@ -24,9 +24,8 @@ public class BasicSecurityConfig extends WebSecurityConfigurerAdapter {
 	//usúario em memória PARA TESTE
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception{
-		
-		 auth.userDetailsService(userDetailsService);
-		
+		 
+		auth.userDetailsService(userDetailsService);
 		auth.inMemoryAuthentication()
 		.withUser("root")
 		.password(passwordEncoder().encode("root"))
