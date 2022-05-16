@@ -14,6 +14,8 @@ import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
 //Para o JPA entender que se trata de uma tabela e fazer o mapeamento.
 @Entity
 //Nome da tabela no banco de dados
@@ -27,6 +29,7 @@ public class Usuario {
 	@NotNull
 	private String nome;
 	
+	@Schema(example = "email@email.com.br")
 	@NotNull
 	@Email(message = "O usuário deve ser um email valido ex:maria@email.com")
 	private String usuario;
@@ -39,6 +42,17 @@ public class Usuario {
 	@OneToMany(mappedBy = "usuario" , cascade = CascadeType.ALL)
 	@JsonIgnoreProperties("usuario")
 	private List<Postagem> postagem;
+	
+	public Usuario(Long id, String nome, String usuario, String senha, String foto) {
+		this.id = id;
+		this.nome = nome;
+		this.usuario = usuario;
+		this.senha = senha;
+		this.foto = foto;
+	}
+	
+	//construtor vazio
+	public Usuario() {}
 	
 	// getter e setter
 	public Long getId() {
