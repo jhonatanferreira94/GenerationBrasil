@@ -1,5 +1,5 @@
 package com.generation.blogpessoal.model;
-
+//classe usada  para logar o usuário
 //extensão de usúario, para usar no login
 public class UsuarioLogin {
 	

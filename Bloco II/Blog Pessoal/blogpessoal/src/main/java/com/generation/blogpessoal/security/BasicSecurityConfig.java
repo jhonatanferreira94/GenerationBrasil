@@ -12,46 +12,42 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-//notação de security
+//notação de scurity
 @EnableWebSecurity
 public class BasicSecurityConfig extends WebSecurityConfigurerAdapter {
-
-	//Serve para comparar os dados digitados com os dados salvos no banco de dados
+	
+	//serve para comparar os dados digitados com os dados salvos no banco de dados
 	@Autowired
 	private UserDetailsService userDetailsService;
 	
-	
-	//usúario em memória PARA TESTE
-	@Override
+	@Override 
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception{
-		 
-		auth.userDetailsService(userDetailsService);
+		auth.userDetailsService(userDetailsService);   //usuario em memoria PARA TESTE
 		auth.inMemoryAuthentication()
-		.withUser("root")
+		.withUser("root")//não precisa estar cadastrado no banco de dados mas é um user válido
 		.password(passwordEncoder().encode("root"))
-		.authorities("ROLE_USER");
-		
+		.authorities("ROLE_USER");// usuário válido
 	}
-	
-	//anotação que deixa uma função acessível globalmente (em toda a minha aplicação)
-	@Bean
-	
-	//função que criptografa a senha digitada
-	public PasswordEncoder passwordEncoder() {
+
+	//notação que deixa uma função acessível globalmente(em toda a minha aplicação)
+	@Bean // ter ou não ter depende da aplicação
+	public PasswordEncoder passwordEncoder() { //como se fosse a classe main de segurança
 		return new BCryptPasswordEncoder();
 	}
 	
-	@Override
+	@Override// aqui seria o que você precisa testar
 	protected void configure(HttpSecurity http) throws Exception{
 		http.authorizeRequests()
 		.antMatchers("/usuarios/logar").permitAll()
 		.antMatchers("/usuarios/cadastrar").permitAll()
-		.antMatchers(HttpMethod.OPTIONS).permitAll()
+		.antMatchers(HttpMethod.OPTIONS).permitAll()// para saber quais opções de metodos tenha acessiveis para utilizar
 		.anyRequest().authenticated()
 		.and().httpBasic()
 		.and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 		.and().cors()
 		.and().csrf().disable();
+
+
 	}
 	
 }

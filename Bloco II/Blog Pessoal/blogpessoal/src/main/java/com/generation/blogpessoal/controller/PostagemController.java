@@ -25,7 +25,7 @@ import com.generation.blogpessoal.repository.PostagemRepository;
 @CrossOrigin(origins="*")
 public class PostagemController {
 	
-	@Autowired
+	@Autowired //transferência de responsabilidade de construir as consultas do banco de dados
 	private PostagemRepository repository;
 	
 	@GetMapping
@@ -48,14 +48,14 @@ public class PostagemController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<Postagem> post (@Valid @RequestBody Postagem postagens){
-		return ResponseEntity.status(HttpStatus.CREATED).body(repository.save(postagens));
+	public ResponseEntity<Postagem> post (@Valid @RequestBody Postagem postagem){
+		return ResponseEntity.status(HttpStatus.CREATED).body(repository.save(postagem));
 		
 	}
 	
 	@PutMapping
-	public ResponseEntity<Postagem> put (@Valid @RequestBody Postagem postagens){
-		return ResponseEntity.status(HttpStatus.OK).body(repository.save(postagens));
+	public ResponseEntity<Postagem> put (@Valid @RequestBody Postagem postagem){
+		return ResponseEntity.status(HttpStatus.OK).body(repository.save(postagem));
 		
 	}
 	

@@ -9,34 +9,34 @@ import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Contact;
 import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.info.License;
-import io.swagger.v3.oas.models.responses.ApiResponse; // Importa você mesmo caso não importa sozinho // Sempre importa a segunda opção (classe)
 
+import io.swagger.v3.oas.models.responses.ApiResponse; // Importa você mesmo caso não importa sozinho
 import io.swagger.v3.oas.models.responses.ApiResponses; // Sempre importa a segunda opção (classe)
-
 
 @Configuration
 public class SwaggerConfig {
+	
+	// Configurações de informações pessoais da aplicação e seus desenvolvedores
 	@Bean
 	public OpenAPI springBlogPessoalOpenAPI() {
 		
         return new OpenAPI()
-				.info(new Info()
-					.title("Projeto Blog Pessoal")
+				.info(new Info().title("Projeto Blog Pessoal")
 					.description("Projeto Blog Pessoal - Generation Brasil")
 					.version("v0.0.1") // Versão da aplicação, atualizando cada vez que mudar
-				.license(new License()
+				    .license(new License()
 					.name("Generation Brasil")
 					.url("https://brazil.generation.org/")) // Informações da empresa
-				.contact(new Contact() // Informações de contato / repositório do projeto
-					.name("Repositório do Projeto do Blog Pessoal")
+				    .contact(new Contact() // Informações de contato / repositório do projeto
+					.name("Jhonatan Ferreira")
 					.url("https://github.com/jhonatanferreira94/BlogPessoal")
-					.email("jhonatan_pferreira@hotmail.com")))
-				.externalDocs(new ExternalDocumentation()
-					.description("Meu GitHub")
-					.url("https://github.com/jhonatanferreira94"));
-
+					.email("jhonatan.pferreira@hotmailcom")))
+				    .externalDocs(new ExternalDocumentation()
+					.description("Meu LinkedIn")
+					.url("https://www.linkedin.com/in/jhonatanferr/"));
 	}
 	
+	// Função pra traduzir as respostas 'http'
 	@Bean
 	public OpenApiCustomiser customerGlobalHeaderOpenApiCustomiser() {
 
@@ -55,12 +55,10 @@ public class SwaggerConfig {
 
 			}));
 		};
-		
 	}
-		
-		// Cada vez que vem um status, ele cria uma resposta e envia ela para o cliente (No navegador)
-		private ApiResponse createApiResponse(String message) {
-			return new ApiResponse().description(message);
-		}
 	
+	// Cada vez que vem um status, ele cria uma resposta e envia ela para o cliente (No navegador)
+	private ApiResponse createApiResponse(String message) {
+		return new ApiResponse().description(message);
+	}
 }
